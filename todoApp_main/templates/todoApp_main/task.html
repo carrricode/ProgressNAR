@@ -1,0 +1,89 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<style>
+  .task-detail-card {
+    max-width: 800px;
+    margin: 2rem auto;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    background-color: #ffffff;
+  }
+
+  .task-detail-card .card-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: #f1f3f5;
+    border-bottom: 2px solid #dee2e6;
+    border-radius: 1rem 1rem 0 0;
+  }
+
+  .task-detail-card .card-body {
+    padding: 2rem;
+  }
+
+  .task-detail-card .deadline-badge {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .task-detail-card .btn-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .subtasks-section {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 1rem;
+  }
+
+  .subtasks-section h4 {
+    margin-bottom: 1rem;
+  }
+
+  .form-check-input:checked {
+    background-color: #198754;
+    border-color: #198754;
+  }
+</style>
+
+<div class="card task-detail-card">
+  <div class="card-header">
+    {{ task.title }}
+  </div>
+
+  <div class="card-body">
+    <blockquote class="blockquote mb-4">
+      <p class="fs-5 text-secondary">{{ task.description }}</p>
+    </blockquote>
+
+    <h5>
+      <span class="badge bg-danger deadline-badge">
+        Deadline: {{ task.deadline|date:"M d, H:i" }}
+      </span>
+    </h5>
+
+    <div class="btn-group">
+      <a href="{% url 'task_update' task.id %}" class="btn btn-success">Update</a>
+      <a href="{% url 'task_delete' task.id %}" class="btn btn-outline-danger">Delete</a>
+    </div>
+
+    <div class="subtasks-section">
+      <h4>Subtasks</h4>
+      {% for stask in subtask %}
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="checkbox" {% if stask.is_done %}checked{% endif %} disabled>
+          <label class="form-check-label {% if stask.is_done %}text-decoration-line-through text-muted{% endif %}">
+            {{ stask.title }}
+          </label>
+        </div>
+      {% empty %}
+        <p class="text-muted">Нет подзадач для этой задачи.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

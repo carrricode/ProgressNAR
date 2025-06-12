@@ -1,0 +1,6 @@
+../.idea
+.venv/
+todoApp/db.sqlite3
+todoApp/__pycache__/
+
+

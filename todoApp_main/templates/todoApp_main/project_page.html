@@ -1,0 +1,106 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="grid-container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h5 class="mb-3">👥 Members</h5>
+    {% for user in users %}
+      <div class="user-item">
+        {{ user.username }}
+      </div>
+    {% endfor %}
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content px-3 py-4">
+    <!-- Search -->
+    <form class="d-flex flex-column flex-sm-row mb-4 gap-2" role="search">
+      <input class="form-control" name="q" type="search" placeholder="Search" aria-label="Search" />
+      <button class="btn btn-outline-success" type="submit">FIND</button>
+    </form>
+
+    <!-- Header -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-2">
+      <h3>
+        <span class="badge text-bg-dark">Number of task: {{ task_amount }}</span>
+      </h3>
+      <a href="{% url 'task_create' project_id %}">
+        <button type="button" class="btn btn-success">ADD NEW TASK +</button>
+      </a>
+    </div>
+
+    <!-- Tasks -->
+    <div class="row g-4">
+      {% for task in tasks %}
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="card h-100 shadow-sm border-0 rounded-4 position-relative task-card">
+            <span class="badge bg-danger position-absolute top-0 end-0 m-3">
+              Deadline: {{ task.deadline|date:"M d, H:i" }}
+            </span>
+            <div class="card-body p-4">
+              <span class="badge bg-success fs-6 px-3 py-2 mb-3 d-inline-block">
+                {{ task.get_status_display }}
+              </span>
+              <h5 class="card-title fw-bold text-primary">
+                {{ task.title }}
+              </h5>
+              <p class="card-text text-muted">
+                {{ task.description|truncatewords:20 }}
+              </p>
+              <a href="{% url 'task' task.id %}" class="btn btn-outline-primary rounded-pill mt-3">
+                open task
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </main>
+</div>
+
+<!-- Responsive Styles -->
+<style>
+  .grid-container {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    min-height: 100vh;
+  }
+
+  .sidebar {
+    background-color: #f8f9fa;
+    padding: 1rem;
+  }
+
+  .user-item {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  .task-card:hover {
+    transform: translateY(-4px);
+    transition: 0.2s ease-in-out;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  .task-card .badge {
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 768px) {
+    .grid-container {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+      order: 2;
+      padding: 1rem 1rem 0 1rem;
+    }
+
+    .main-content {
+      order: 1;
+    }
+  }
+</style>
+{% endblock %}

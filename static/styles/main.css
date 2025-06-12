@@ -1,0 +1,87 @@
+
+  p {
+    color: black;
+  }
+
+  body {
+    background-color: azure;
+  }
+  a {
+    text-decoration: none;
+  }
+
+  .circle-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .navbar {
+    background-color: white !important;
+  }
+
+  .custom-link {
+      color: white;
+  }
+
+  .task-card:hover {
+    transform: translateY(-5px);
+    transition: transform 0.2s ease-in-out;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .task-card .badge {
+    font-size: 0.85rem;
+  }
+
+  .form-wrapper {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 1rem;
+    background-color: #f8f9fa;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  }
+
+  .form-wrapper h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+  }
+
+  .form-wrapper button {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    border-radius: 0.5rem;
+  }
+
+  .form-wrapper p {
+    margin-bottom: 1.25rem;
+  }
+
+  .form-wrapper label {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    display: block;
+  }
+
+  .form-wrapper input,
+  .form-wrapper select,
+  .form-wrapper textarea {
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    width: 100%;
+    border: 1px solid #ced4da;
+  }
+
+  .form-wrapper input:focus,
+  .form-wrapper select:focus,
+  .form-wrapper textarea:focus {
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  }
+
+

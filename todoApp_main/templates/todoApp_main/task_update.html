@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+
+<div class="form-wrapper">
+  <h2>Update Task</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+  </form>
+</div>
+{% endblock %}

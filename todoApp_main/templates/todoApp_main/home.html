@@ -1,0 +1,71 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="p-3">
+    <form class="d-flex" role="search">
+        <input class="form-control me-2" name='q' type="search" placeholder="Search" aria-label="Search"/>
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+</div>
+
+
+<div class="p-3 d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+  <h3 class="mb-2 mb-md-0">
+    <span class="badge text-bg-dark">Number of projects: {{ projects_amount }}</span>
+  </h3>
+
+  <a href="{% url 'project_create' %}"><button type="button" class="btn btn-success">ADD NEW PROJECT +</button></a>
+</div>
+
+
+
+<div class="container py-4">
+  <div class="row g-4">
+    {% for project in projects %}
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0 rounded-4 position-relative task-card">
+
+          <!-- Deadline Badge -->
+
+
+          <div class="card-body p-4">
+            <!-- Status Badge -->
+
+
+            <!-- Title -->
+            <h4 class="card-title fw-bold text-primary">
+              {{ project.name}}
+            </h4>
+
+
+            <h6 class="card-title fw-bold ">
+              users:
+            </h6>
+
+            <!-- Description -->
+            {% if project.users.all %} {# Проверяем, есть ли вообще пользователи у проекта #}
+                <ul>
+                    {% for user in project.users.all %} {# Итерируем по всем связанным пользователям #}
+                        <li>
+                            {{ user.username }} <br>
+
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>К этому проекту пока не прикреплены пользователи.</p>
+            {% endif %}
+
+            <!-- Show Button -->
+            <a href="{% url 'project' project.id %}" class="btn btn-outline-primary rounded-pill mt-3">
+              Open project
+            </a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}
