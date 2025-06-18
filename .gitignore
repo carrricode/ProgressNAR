@@ -1,6 +1,6 @@
 ../.idea
 .venv/
-todoApp/db.sqlite3
-todoApp/__pycache__/
+db.sqlite3
+__pycache__/
 
 

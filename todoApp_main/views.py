@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
 from django.template.defaultfilters import title
 
@@ -28,7 +28,7 @@ def login_page(request):
         password = request.POST.get('password')
 
         try:
-            user = User.objects.get(username=username)
+            User.objects.get(username=username)
         except:
             messages.error(request,"user doesn't exists")
 
@@ -53,6 +53,7 @@ def register_page(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
+
             user = form.save(commit=False)
             user.username = user.username.lower()
             user.save()
